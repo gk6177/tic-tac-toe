@@ -5,12 +5,14 @@ import Player from './components/Player.jsx';
 import Log from './components/Log.jsx';
 import GameOver from './components/GameOver.jsx';
 import clickFx from './assets/sounds/click.mp3';
+import winFx from './assets/sounds/yeah.mp3';
 import { WINNING_COMBINATIONS } from './data/winning_combinations.js';
 
 const clickSound = new Audio(clickFx);
-// const resetSound = new Audio(resetFx);
+const winSound = new Audio(winFx);
 clickSound.preload = 'auto';
-// resetSound.preload = 'auto';
+winSound.preload = 'auto';
+
 
 const PLAYERS = {
   X: 'Player 1',
@@ -134,7 +136,12 @@ function App() {
             onChangeName={handlePlayerNameChange}
           />
         </ol>
-        {(winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart} />}
+        {(winner || hasDraw) &&
+          <GameOver
+            winner={winner}
+            onRestart={handleRestart}
+            winSound={winFx}
+          />}
         <GameBoard
           onSelectSquare={handleSelectSquare}
           board={gameBoard}
